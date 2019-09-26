@@ -1,46 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        ul, #myUL {
-            list-style-type: none;
-        }
-        #myUL {
-            margin: 0;
-            padding: 0;
-        }
-        .box {
-            cursor: pointer;
-            -webkit-user-select: none; /* Safari 3.1+ */
-            -moz-user-select: none; /* Firefox 2+ */
-            -ms-user-select: none; /* IE 10+ */
-            user-select: none;
-        }
-        .box::before {
-            content: "\2610";
-            color: black;
-            display: inline-block;
-            margin-right: 6px;
-        }
-        .check-box::before {
-            content: "\2611";
-            color: dodgerblue;
-        }
-        .nested {
-            display: none;
-        }
-        .active {
-            display: block;
-        }
-    </style>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 </head>
 <body>
 <h2>Impacted Component</h2>
 <p> Please select the component impacted by your change, this information will be used to evaluate the test campaign to execute </p>
 <p>Workflow : </p>
 <p>  1 - Select Category or subcategory</p>
-<p>  2 - Copy generated string value in your    PR</p>
+<p>  2 - Copy generated string value in your PR</p>
 <p>  3 - Thanks !</p>
 
 <!-- The text field -->
@@ -2807,6 +2775,27 @@
     }
 
     function copyFunction() {
+
+        $.ajax({
+            url: 'https://perzoinc.atlassian.net/rest/api/2/MOB-2677',
+            type: 'GET',
+            //dataType: 'json',
+            xhrFields: {
+                withCredentials: false
+            },
+            crossDomain : true,
+            headers: { "Content-Type":"application/json","Accept": "application/json",'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS', 'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token' },
+
+            //headers: { "Content-Type":"application/json","Accept": "application/json",  'Access-Control-Allow-Origin': '*', "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS","Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With" },
+            error: function(xhr, status, error) {
+                alert("error " + " " + status + " " + error);
+            },
+            success: function(json) {
+                alert("success");
+            }
+        });
+        return
+
         /* Get the text field */
         var copyText = document.getElementById("myInput");
 
